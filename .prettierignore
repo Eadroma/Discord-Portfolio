@@ -1,0 +1,11 @@
+
+build/**/*
+public/**/*
+node_modules/**/*
+.history/**/*
+.vscode/**/*
+.yarn/**/*
+.yarncache/**/*
+.idea/**/*
+
+package.json

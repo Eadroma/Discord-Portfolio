@@ -1,0 +1,71 @@
+{
+  "bio": {
+    "skills": "Compétences"
+  },
+    "header": {
+      "CTA": {
+        "login": "Se connecter",
+        "logout": "Se déconnecter"
+      },
+      "navigation": {
+        "home": "Accueil",
+        "contact": "Contact"
+      }
+    },
+    "github": {
+      "search": "Rechercher un projet...",
+      "updatedAt": "Màj le :",
+      "filter": "Filtrer par langage",
+      "language": "Langage",
+      "loadMore": "Charger plus de dépôts",
+      "noRepositories": "Aucun dépôt GitHub configuré",
+      "noRepositoriesConfigured": "Aucun dépôt GitHub configuré",
+      "noDescription": "Aucune description disponible"
+
+    },
+    "discord": {
+      "success": "Vous êtes connecté à Discord avec succès !",
+      "error": "Erreur de connexion à Discord. Veuillez réessayer.",
+      "message": {
+        "label": "Envoyez-moi un message",
+        "placeholder": "Entrez votre message ici..."
+      }
+    },
+    "contact": {
+      "title": "Formulaire de contact",
+      "form": {
+        "name": {
+          "label": "Nom",
+          "placeholder": "Entrez votre nom"
+        },
+        "email": {
+          "label": "Email",
+          "placeholder": "Entrez votre email"
+        },
+        "phone": {
+          "label": "Téléphone",
+          "placeholder": "Entrez votre numéro de téléphone"
+        },
+        "message": {
+          "label": "Message",
+          "placeholder": "Entrez votre message"
+        },
+        "submit": "Envoyer"
+      }
+    },
+    "notification": {
+      "contact": {
+        "success": "Votre message a été envoyé avec succès !",
+        "error": "Une erreur s'est produite lors de l'envoi de votre message. Veuillez réessayer."
+      }
+    },
+    "experience": {
+      "title": "Expérience",
+      "present": "Présent",
+      "duration": {
+        "years": "{{years}} an(s)",
+        "months": "{{months}} mois(s)",
+        "yearsAndMonths": "{{years}} an(s) et {{months}} mois(s)"
+      }
+    }
+  }
