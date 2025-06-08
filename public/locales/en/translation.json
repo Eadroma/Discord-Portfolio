@@ -1,0 +1,66 @@
+{
+  "bio": {
+    "skills": "Skills"
+  },
+  "header": {
+    "CTA": {
+      "login": "Login",
+      "logout": "Logout"
+    },
+    "navigation": {
+      "home": "Home",
+      "contact": "Contact"
+    }
+  },
+  "github": {
+    "search": "Search a project...",
+    "updatedAt": "Last updated:",
+    "filter": "Filter by language",
+    "language": "Language",
+    "loadMore": "Load more repositories",
+    "noRepositories": "No repositories found",
+    "noRepositoriesConfigured": "No GitHub repositories configured",
+    "noDescription": "No description available"
+  },
+  "discord": {
+    "success": "You are successfully logged in to Discord!",
+    "error": "Error logging in to Discord. Please try again.",
+    "message": {
+      "label": "Send me a message",
+      "placeholder": "Enter your message here..."
+    }
+  },
+  "contact": {
+    "title": "Contact Form",
+    "form": {
+      "name": {
+        "label": "Name",
+        "placeholder": "Enter your name"
+      },
+      "email": {
+        "label": "Email",
+        "placeholder": "Enter your email"
+      },
+      "phone": {
+        "label": "Phone",
+        "placeholder": "Enter your phone number"
+      },
+      "message": {
+        "label": "Message",
+        "placeholder": "Enter your message"
+      },
+      "submit": "Send"
+    }
+  },
+  "experience": {
+    "title": "Experience",
+    "present": "Present",
+    "duration": {
+      "years": "{{years}} year(s)",
+      "months": "{{months}} month(s)",
+      "yearsAndMonths": "{{years}} year(s) and {{months}} month(s)",
+      "yearsPlural": "years",
+      "monthsPlural": "months"
+    }
+  }
+}
