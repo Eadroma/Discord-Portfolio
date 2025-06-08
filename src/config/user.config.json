@@ -1,0 +1,64 @@
+{
+  "name": "John Doe",
+  "jobTitle": {
+    "en": "Frontend Developer",
+    "fr": "Développeur Frontend"
+  },
+  "description": {
+    "en": "I am a passionate frontend developer dedicated to creating exceptional user experiences. I love solving problems and bringing designs to life.",
+    "fr": "Je suis un développeur frontend passionné par la création d'expériences utilisateur exceptionnelles. J'aime résoudre des problèmes et donner vie aux designs."
+  },
+  "location": {
+    "en": "Sample City, Country",
+    "fr": "Exemple Ville, Pays"
+  },
+  "email": "example@example.com",
+  "phone": "+00 123 456 7890",
+  "socials": {
+    "linkedin": "https://linkedin.com/in/example"
+  },
+  "skills": [
+    {
+      "name": "Javascript",
+      "icon": "https://path-to-icon.js"
+    },
+    {
+      "name": "React",
+      "icon": "https://react-icon-link.png"
+    },
+    {
+      "name": "CSS",
+      "icon": "https://css-icon-link.png"
+    },
+    {
+      "name": "Docker",
+      "icon": "https://docker-icon-link.png"
+    },
+    {
+      "name": "Git",
+      "icon": "https://git-icon-link.png"
+    }
+  ],
+  "experiences": [
+    {
+      "company": "Tech Solutions",
+      "position": "Frontend Developer",
+      "startDate": "2020-01-01",
+      "endDate": "2021-12-31",
+      "description": {
+        "en": "Worked on building and improving user interfaces for various web projects.",
+        "fr": "A travaillé sur la création et l'amélioration d'interfaces utilisateur pour divers projets web."
+      }
+    },
+    {
+      "company": "Innovate Inc.",
+      "position": "Full Stack Developer",
+      "startDate": "2022-01-01",
+      "endDate": null,
+      "description": {
+        "en": "Focused on full-stack development using React.js and Node.js to deliver high-quality software solutions.",
+        "fr": "Focalisé sur le développement full-stack en utilisant React.js et Node.js pour fournir des solutions logicielles de haute qualité."
+      }
+    }
+  ]
+}

@@ -1,0 +1,89 @@
+{
+  "name": "Saif Boukottaya",
+  "jobTitle": {
+    "en": "Frontend Developer",
+    "fr": "Développeur Frontend"
+  },
+  "description": {
+    "en": "I am a passionate frontend developer dedicated to creating exceptional user experiences. I love turning ideas into reality through code and am always looking for new challenges.",
+    "fr": "Je suis un développeur frontend passionné par la création d'expériences utilisateur exceptionnelles. J'aime transformer les idées en réalité grâce au code et je suis toujours à la recherche de nouveaux défis."
+  },
+  "location": {
+    "en": "Marseille, France",
+    "fr": "Marseille, France"
+  },
+  "email": "boukottaya.jr@gmail.com",
+  "phone": "+33 7 66 07 47 88",
+  "socials": {
+    "linkedin": "https://www.linkedin.com/in/saif-boukottaya"
+  },
+  "skills": [
+    {
+      "name": "Typescript",
+      "icon": "https://static-00.iconduck.com/assets.00/typescript-plain-icon-256x256-ypojgpyj.png"
+    },
+    {
+      "name": "React",
+      "icon": "https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg"
+    },
+    {
+      "name": "Vue",
+      "icon": "https://static-00.iconduck.com/assets.00/vue-js-icon-2048x1766-btrgkrhi.png"
+    },
+    {
+      "name": "Next.js",
+      "icon": "https://www.svgrepo.com/show/354113/nextjs-icon.svg"
+    },
+    {
+      "name": "Tailwind CSS",
+      "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Tailwind_CSS_Logo.svg/1280px-Tailwind_CSS_Logo.svg.png"
+    },
+    {
+      "name": "Material UI",
+      "icon": "https://static-00.iconduck.com/assets.00/material-ui-icon-2048x1626-on580ia9.png"
+    },
+    {
+      "name": "Docker",
+      "icon": "https://img.icons8.com/fluent/512/docker.png"
+    },
+    {
+      "name": "Git",
+      "icon": "https://img.icons8.com/color/512/git.png"
+    },
+    {
+      "name": "Microservices"
+    }
+  ],
+  "experiences": [
+    {
+      "company": "Access IT",
+      "position": "Full stack developer",
+      "startDate": "2020-03-01",
+      "endDate": "2021-02-01",
+      "description": {
+        "fr": "Développement d'applications web et mobiles en utilisant React Native et React.js",
+        "en": "Development of web and mobile applications using React Native and React.js"
+      }
+    },
+    {
+      "company": "Reeasy",
+      "position": "Full stack developer",
+      "startDate": "2021-04-01",
+      "endDate": "2022-04-01",
+      "description": {
+        "fr": "Développement d'un site web vitrine d'agence immobilière en utilisant Next.js et Material UI ainsi qu'un dashboard pour les agents immobiliers en utilisant React et Tailwind CSS",
+        "en": "Development of a real estate agency website using Next.js and Material UI as well as a dashboard for real estate agents using React and Tailwind CSS"
+      }
+    },
+    {
+      "company": "Smart Tribune",
+      "position": "Frontend developer",
+      "startDate": "2022-11-01",
+      "endDate": null,
+      "description": {
+        "fr": "Développement de solution SaaS pour la gestion de base de connaissances et de selfcare, création de différents produits (FAQ, Bot, Node-Builder, Extension chrome/Mozilla, et de microservices front-end.)",
+        "en": "Development of SaaS solutions for knowledge base and selfcare management, creation of different products (FAQ, Bot, Node-Builder, Chrome/Mozilla extension, and front-end microservices)."
+      }
+    }
+  ]
+}
