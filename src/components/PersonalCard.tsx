@@ -65,7 +65,7 @@ const PersonalCard: React.FC = () => {
         <div className="flex gap-2 sm:gap-3 items-start mb-3 sm:mb-4">
           <div className="relative flex-shrink-0">
             <img
-              src="/public/icon.png"
+              src="/icon.png"
               alt="Profile"
               className="w-14 h-14 sm:w-16 sm:h-16 rounded-full object-cover ring-2 ring-[#5865F2]"
             />
