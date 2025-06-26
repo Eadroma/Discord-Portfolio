@@ -82,7 +82,7 @@ const PersonalCard: React.FC = () => {
             <h2 className="text-left text-sm sm:text-base md:text-lg font-bold text-gray-900 dark:text-white truncate w-full">
               {user.name}
             </h2>
-            <p className="text-gray-600 dark:text-[#B5BAC1] text-xs sm:text-sm truncate w-full">
+            <p className="text-left text-gray-600 dark:text-[#B5BAC1] text-xs sm:text-sm truncate w-full">
               {user.jobTitle[currentLanguage as keyof typeof user.jobTitle]}
             </p>
           </div>
