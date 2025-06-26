@@ -123,4 +123,22 @@
   body {
     @apply bg-background text-foreground;
   }
+
+  /* Custom utility classes for consistent alignment */
+  .card-container {
+    @apply flex flex-col gap-4 md:gap-6 items-stretch;
+  }
+
+  .card-equal-height {
+    @apply h-full min-h-[400px] lg:min-h-[500px];
+  }
+
+  .responsive-grid {
+    @apply grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 md:gap-6;
+  }
+
+  /* Smooth transitions for responsive changes */
+  .responsive-transition {
+    @apply transition-all duration-300 ease-in-out;
+  }
 }

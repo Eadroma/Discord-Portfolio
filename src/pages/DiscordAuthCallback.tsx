@@ -5,14 +5,31 @@ const DiscordAuthCallback: React.FC = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    console.log('Discord callback - URL:', window.location.href);
+    console.log('Discord callback - Hash:', window.location.hash);
+
     const fragment = new URLSearchParams(window.location.hash.slice(1));
-    const [accessToken, tokenType] = [fragment.get('access_token'), fragment.get('token_type')];
+    const [accessToken, tokenType, error] = [
+      fragment.get('access_token'),
+      fragment.get('token_type'),
+      fragment.get('error'),
+    ];
+
+    // Check for Discord OAuth errors
+    if (error) {
+      console.error('Discord OAuth error:', error);
+      navigate('/?discord_error=' + error);
+      return;
+    }
 
     if (!accessToken || !tokenType) {
       console.error('No access token or token type found in URL');
-      navigate('/');
+      console.log('Available fragments:', Array.from(fragment.entries()));
+      navigate('/?discord_error=no_token');
       return;
     }
+
+    console.log('Token found, fetching user data...');
 
     fetch('https://discord.com/api/users/@me', {
       headers: {
@@ -21,38 +38,38 @@ const DiscordAuthCallback: React.FC = () => {
     })
       .then((result) => result.json())
       .then((response) => {
+        console.log('Discord user data received:', response);
         const { id, avatar, global_name, banner, clan, username } = response;
 
-        localStorage.setItem(
-          'discordUser',
-          JSON.stringify({
-            id,
-            avatar,
-            globalName: global_name,
-            username,
-            banner,
-            badge: clan && {
-              tag: clan.tag,
-              id: clan.badge,
-              guildId: clan.identity_guild_id,
-            },
-          }),
-        );
+        const userData = {
+          id,
+          avatar,
+          globalName: global_name,
+          username,
+          banner,
+          badge: clan && {
+            tag: clan.tag,
+            id: clan.badge,
+            guildId: clan.identity_guild_id,
+          },
+        };
+
+        console.log('Storing user data:', userData);
+        localStorage.setItem('discordUser', JSON.stringify(userData));
 
         // Dispatch a custom event to notify other components about the auth change
         window.dispatchEvent(new Event('discord-auth-change'));
 
         // Short delay to ensure event is processed before navigation
         setTimeout(() => {
-          navigate('/');
-        }, 10);
+          navigate('/?discord_auth=success');
+        }, 100);
       })
       .catch((error) => {
         console.error('Authentication error:', error);
-        navigate('/');
+        navigate('/?discord_error=fetch_failed');
       });
   }, [navigate]);
-
 
   return (
     <div className="flex items-center justify-center min-h-screen">

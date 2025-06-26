@@ -4,12 +4,12 @@ import { ExperienceCard, GithubRepo, PersonalCard } from '@/components'; // Adju
 
 const Home: React.FC = () => {
   return (
-    <div className="h-screen flex flex-col items-start justify-start gap-16 mx-[4%] max-h-[85%] overflow-y-auto mt-2">
-      <div className="flex flex-row gap-4 w-full h-[60%]">
+    <div className="min-h-screen flex flex-col items-start justify-start gap-4 md:gap-8 lg:gap-16 mx-[2%] sm:mx-[3%] md:mx-[4%] overflow-y-auto mt-2 py-4">
+      <div className="flex flex-col lg:flex-row gap-4 w-full lg:h-[60%]">
         <PersonalCard />
         <GithubRepo />
       </div>
-      <div className="flex flex-row gap-4 w-full justify-start">
+      <div className="flex flex-col w-full justify-start">
         <ExperienceCard />
       </div>
     </div>

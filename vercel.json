@@ -1,0 +1,14 @@
+{
+  "routes": [
+    {
+      "src": "/auth/discord/callback(.*)",
+      "dest": "/index.html"
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}

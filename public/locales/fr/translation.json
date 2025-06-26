@@ -50,7 +50,8 @@
           "label": "Message",
           "placeholder": "Entrez votre message"
         },
-        "submit": "Envoyer"
+        "submit": "Envoyer",
+        "sending": "Envoi en cours..."
       }
     },
     "notification": {

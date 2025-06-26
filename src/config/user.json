@@ -20,35 +20,35 @@
   "skills": [
     {
       "name": "Typescript",
-      "icon": "https://static-00.iconduck.com/assets.00/typescript-plain-icon-256x256-ypojgpyj.png"
+      "icon": "https://raw.githubusercontent.com/devicons/devicon/master/icons/typescript/typescript-original.svg"
     },
     {
       "name": "React",
-      "icon": "https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg"
+      "icon": "https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original.svg"
     },
     {
       "name": "Vue",
-      "icon": "https://static-00.iconduck.com/assets.00/vue-js-icon-2048x1766-btrgkrhi.png"
+      "icon": "https://raw.githubusercontent.com/devicons/devicon/master/icons/vuejs/vuejs-original.svg"
     },
     {
       "name": "Next.js",
-      "icon": "https://www.svgrepo.com/show/354113/nextjs-icon.svg"
+      "icon": "https://raw.githubusercontent.com/devicons/devicon/master/icons/nextjs/nextjs-original.svg"
     },
     {
       "name": "Tailwind CSS",
-      "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Tailwind_CSS_Logo.svg/1280px-Tailwind_CSS_Logo.svg.png"
+      "icon": "https://raw.githubusercontent.com/devicons/devicon/master/icons/tailwindcss/tailwindcss-original.svg"
     },
     {
       "name": "Material UI",
-      "icon": "https://static-00.iconduck.com/assets.00/material-ui-icon-2048x1626-on580ia9.png"
+      "icon": "https://raw.githubusercontent.com/devicons/devicon/master/icons/materialui/materialui-original.svg"
     },
     {
       "name": "Docker",
-      "icon": "https://img.icons8.com/fluent/512/docker.png"
+      "icon": "https://raw.githubusercontent.com/devicons/devicon/master/icons/docker/docker-original.svg"
     },
     {
       "name": "Git",
-      "icon": "https://img.icons8.com/color/512/git.png"
+      "icon": "https://raw.githubusercontent.com/devicons/devicon/master/icons/git/git-original.svg"
     },
     {
       "name": "Microservices"

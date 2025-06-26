@@ -14,16 +14,18 @@ const App: React.FC = () => {
     <ThemeProvider>
       <Toaster richColors position="top-right" />
       <BrowserRouter>
-        <div className="m-0 bg-[#F5F5F5] text-black dark:bg-[#232528] dark:text-white">
+        <div className="min-h-screen bg-[#F5F5F5] text-black dark:bg-[#232528] dark:text-white">
           <Navbar className="bg-[#E5E7EB] dark:bg-[#1E1F22]" />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/auth/discord/callback" element={<DiscordAuthCallback />} />
-            <Route path="/unauthorized" element={<Unauthorized />} />
-            <Route path="/settings" element={<Settings />} />
-            <Route path="/contact" element={<Contact />} />
-            {/* Add more routes as needed */}
-          </Routes>
+          <main className="pb-4">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/auth/discord/callback" element={<DiscordAuthCallback />} />
+              <Route path="/unauthorized" element={<Unauthorized />} />
+              <Route path="/settings" element={<Settings />} />
+              <Route path="/contact" element={<Contact />} />
+              {/* Add more routes as needed */}
+            </Routes>
+          </main>
         </div>
       </BrowserRouter>
     </ThemeProvider>
