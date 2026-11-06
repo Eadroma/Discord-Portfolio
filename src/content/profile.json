@@ -24,12 +24,12 @@
   },
   "skills": [
     {
-      "name": "JavaScript",
-      "icon": "https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg"
-    },
-    {
       "name": "TypeScript",
       "icon": "https://raw.githubusercontent.com/devicons/devicon/master/icons/typescript/typescript-original.svg"
+    },
+    {
+      "name": "JavaScript",
+      "icon": "https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg"
     },
     {
       "name": "React",
