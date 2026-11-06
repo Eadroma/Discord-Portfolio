@@ -1,0 +1,4 @@
+# LF everywhere: Prettier checks for it, and the admin compares profile.json byte for byte.
+* text=auto eol=lf
+*.png binary
+*.ico binary
