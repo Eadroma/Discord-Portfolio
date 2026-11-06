@@ -54,7 +54,8 @@ describe('validateProfile', () => {
     const p = clone();
     p.socials = { ...p.socials, linkedin: 'javascript:alert(1)' };
     p.theme = { ...p.theme, accent: 'red' };
-    p.skills[0] = { name: 'TypeScript', icon: 'http://example.com/ts.svg' };
+    // Keep the name: the admin may reorder skills, and a renamed one could collide with another.
+    p.skills[0] = { ...p.skills[0], icon: 'http://example.com/logo.svg' };
     expect(issuesOf(p)).toEqual([
       { path: 'socials.linkedin', code: 'invalidUrl' },
       { path: 'theme.accent', code: 'invalidColor' },
@@ -64,7 +65,7 @@ describe('validateProfile', () => {
 
   it('flags a skill listed twice, whatever the case', () => {
     const p = clone();
-    p.skills.push({ name: 'typescript', icon: undefined as unknown as string });
+    p.skills.push({ name: p.skills[0].name.toUpperCase(), icon: undefined as unknown as string });
     expect(issuesOf(p)).toEqual([
       { path: `skills.${p.skills.length - 1}.name`, code: 'duplicate' },
     ]);
