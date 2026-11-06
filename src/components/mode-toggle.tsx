@@ -1,19 +1,22 @@
-import { useCallback } from 'react';
 import { Moon, Sun } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import { Button } from '@/components/ui/button';
-import { useTheme } from '@/components/theme-provider';
+import { useTheme } from '@/components/theme-context';
 
 export function ModeToggle() {
+  const { t } = useTranslation();
   const { theme, setTheme } = useTheme();
-
-  const toggleTheme = useCallback(() => {
-    setTheme(theme === 'light' ? 'dark' : 'light');
-  }, [setTheme, theme]);
+  const next = theme === 'light' ? 'dark' : 'light';
 
   return (
-    <Button variant="outline" size="icon" onClick={toggleTheme} className="h-7 w-8">
-      <Sun className="w-[0.9rem] h-[0.7rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-      <Moon className="absolute w-[0.9rem] h-[0.7rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+    <Button
+      variant="secondary"
+      size="icon"
+      onClick={() => setTheme(next)}
+      aria-label={t(`header.CTA.theme.${next}`)}
+      className="size-9"
+    >
+      {theme === 'light' ? <Moon /> : <Sun />}
     </Button>
   );
 }

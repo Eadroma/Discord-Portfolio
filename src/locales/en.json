@@ -1,0 +1,195 @@
+{
+  "bio": {
+    "skills": "Skills",
+    "linkedin": "LinkedIn"
+  },
+  "header": {
+    "CTA": {
+      "login": "Login",
+      "logout": "Logout",
+      "switchLanguage": "Switch to French",
+      "theme": {
+        "dark": "Switch to dark theme",
+        "light": "Switch to light theme"
+      },
+      "admin": "Administration"
+    },
+    "navigation": {
+      "home": "Home",
+      "contact": "Contact"
+    }
+  },
+  "github": {
+    "search": "Search a project...",
+    "updatedAt": "Last updated:",
+    "filter": "Filter by language",
+    "language": "Language",
+    "loadMore": "Load more repositories",
+    "noRepositories": "No repositories found",
+    "noRepositoriesConfigured": "No GitHub repositories configured",
+    "noDescription": "No description available",
+    "profile": "GitHub profile",
+    "rateLimit": "GitHub is limiting requests from your network. Please try again in a few minutes.",
+    "loadError": "Could not load the GitHub repositories.",
+    "loading": "Loading repositories"
+  },
+  "discord": {
+    "success": "You are successfully logged in to Discord!",
+    "error": "Error logging in to Discord. Please try again.",
+    "message": {
+      "label": "Send me a message",
+      "placeholder": "Enter your message here..."
+    }
+  },
+  "contact": {
+    "title": "Contact Form",
+    "form": {
+      "name": {
+        "label": "Name",
+        "placeholder": "Enter your name"
+      },
+      "email": {
+        "label": "Email",
+        "placeholder": "Enter your email"
+      },
+      "phone": {
+        "label": "Phone",
+        "placeholder": "Enter your phone number"
+      },
+      "message": {
+        "label": "Message",
+        "placeholder": "Enter your message"
+      },
+      "submit": "Send",
+      "sending": "Sending..."
+    },
+    "subtitle": "Send me a message and I will get back to you!"
+  },
+  "notification": {
+    "contact": {
+      "success": "Your message has been sent successfully!",
+      "error": "An error occurred while sending your message. Please try again.",
+      "missingName": "Please enter your name.",
+      "missingContact": "Please leave an email or a phone number so I can reply.",
+      "missingMessage": "Please write a message.",
+      "invalidEmail": "This email address doesn't look right.",
+      "tooLong": "One of the fields is too long. Please shorten it."
+    }
+  },
+  "experience": {
+    "title": "Experience",
+    "present": "Present",
+    "duration": {
+      "years_one": "{{count}} year",
+      "years_other": "{{count}} years",
+      "months_one": "{{count}} month",
+      "months_other": "{{count}} months",
+      "yearsAndMonths": "{{years}}, {{months}}"
+    }
+  },
+  "notFound": {
+    "title": "This channel doesn't exist",
+    "text": "The page you were looking for was moved or never existed.",
+    "back": "Back to the profile"
+  },
+  "admin": {
+    "title": "Administration",
+    "subtitle": "Edit the portfolio. Publishing commits profile.json to the {{branch}} branch.",
+    "loading": "Loading the profile",
+    "login": {
+      "title": "Admin sign-in",
+      "text": "Only the portfolio owner can edit it. Sign in with the Discord account set as admin.",
+      "button": "Sign in with Discord"
+    },
+    "errors": {
+      "title": "The admin area is unavailable",
+      "login": "Discord sign-in failed. Please try again.",
+      "forbidden": "This Discord account is not the admin of this portfolio.",
+      "expired": "Your session expired. Sign in again: your edits are kept.",
+      "notConfigured": "The admin area is not set up: check the environment variables in the README.",
+      "githubConfig": "GitHub refused access: check GITHUB_TOKEN, GITHUB_REPO and that the GITHUB_BRANCH branch exists.",
+      "upstream": "Discord or GitHub did not answer. Please try again in a moment.",
+      "remoteInvalid": "profile.json on the branch does not match the expected format. Fix it in the repository first.",
+      "invalid": "Some fields need fixing before publishing.",
+      "unauthenticated": "Your session expired. Sign in again.",
+      "tooLarge": "The profile is too large to publish.",
+      "invalidJson": "The request was malformed.",
+      "unsupportedMediaType": "The request was malformed."
+    },
+    "sections": {
+      "profile": "Profile",
+      "contact": "Contact details",
+      "theme": "Banner colors",
+      "skills": "Skills",
+      "experiences": "Experience"
+    },
+    "fields": {
+      "name": "Name",
+      "jobTitle": "Job title",
+      "status": "Availability status",
+      "location": "Location",
+      "description": "About",
+      "email": "Email",
+      "phone": "Phone",
+      "linkedin": "LinkedIn URL",
+      "github": "GitHub username",
+      "primary": "First color",
+      "accent": "Second color",
+      "skillName": "Skill",
+      "skillIcon": "Icon URL (https)",
+      "company": "Company",
+      "position": "Position",
+      "startDate": "Start date",
+      "endDate": "End date",
+      "expDescription": "Description"
+    },
+    "hints": {
+      "status": "Shown under your name. Leave both languages empty to hide it.",
+      "github": "Used to list your public repositories.",
+      "experiences": "Shown most recent first, whatever the order here.",
+      "endDate": "Leave empty for your current job."
+    },
+    "lang": {
+      "en": "English",
+      "fr": "French"
+    },
+    "actions": {
+      "addSkill": "Add a skill",
+      "addExperience": "Add an experience",
+      "remove": "Remove {{name}}",
+      "moveUp": "Move {{name}} up",
+      "moveDown": "Move {{name}} down",
+      "publish": "Publish",
+      "publishing": "Publishing…",
+      "retry": "Try again"
+    },
+    "message": {
+      "label": "Change summary (commit message)",
+      "placeholder": "What changed? e.g. new job"
+    },
+    "dirty": "Unpublished changes",
+    "clean": "Up to date",
+    "fixErrors": "Some fields need fixing before publishing.",
+    "published": "Published to {{branch}}.",
+    "publishedDetail": "Committed to {{branch}}. Vercel builds this branch in a minute or two.",
+    "seeCommit": "See the commit",
+    "conflict": {
+      "title": "The profile changed since you opened this page",
+      "text": "Someone (another tab, or a commit by hand) published in between. Reload to start from the latest version; your unpublished edits will be lost.",
+      "reload": "Reload the latest version"
+    },
+    "issues": {
+      "required": "Required.",
+      "tooLong": "Too long.",
+      "tooMany": "Too many items.",
+      "invalidEmail": "Not a valid email address.",
+      "invalidUrl": "Must be an https:// link.",
+      "invalidDate": "Not a valid date.",
+      "dateOrder": "Must be after the start date.",
+      "invalidColor": "Must be a #RRGGBB color.",
+      "invalidUsername": "Letters, digits and dashes only.",
+      "duplicate": "Already in the list.",
+      "invalidType": "Invalid value."
+    }
+  }
+}

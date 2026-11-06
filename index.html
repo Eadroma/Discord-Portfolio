@@ -2,9 +2,31 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
+    <link rel="icon" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React + TS</title>
+    <title>Saif Boukottaya · Frontend Developer</title>
+    <meta
+      name="description"
+      content="Portfolio of Saif Boukottaya, frontend developer in Marseille: projects, experience and contact."
+    />
+    <meta property="og:title" content="Saif Boukottaya · Frontend Developer" />
+    <meta
+      property="og:description"
+      content="Projects, experience and contact, in a Discord-style profile."
+    />
+    <meta property="og:image" content="/icon.png" />
+    <meta name="theme-color" content="#1E1F22" />
+    <script>
+      // Runs before first paint: setting the theme class from React would flash the light theme first.
+      var theme;
+      try {
+        theme = localStorage.getItem('portfolio-theme');
+      } catch (e) {}
+      if (theme !== 'light' && theme !== 'dark') {
+        theme = matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+      }
+      document.documentElement.classList.add(theme);
+    </script>
   </head>
   <body>
     <div id="root"></div>

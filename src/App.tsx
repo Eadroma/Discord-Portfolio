@@ -1,29 +1,43 @@
-import React from 'react';
-import './App.css';
+import React, { lazy, Suspense } from 'react';
 import { Navbar, ThemeProvider } from '@/components';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from '@/pages/Home.tsx';
 import DiscordAuthCallback from '@/pages/DiscordAuthCallback';
-import Unauthorized from '@/pages/Unauthorized.tsx';
-import Settings from '@/pages/Settings.tsx';
 import Contact from '@/pages/Contact.tsx';
+import NotFound from '@/pages/NotFound.tsx';
 import { Toaster } from 'sonner';
+import { useTheme } from '@/components/theme-context';
+
+// Loaded on demand: visitors never download the admin code.
+const Admin = lazy(() => import('@/pages/Admin.tsx'));
+
+// Sonner keeps its own theme; this keeps its toasts in step with the site's.
+const ThemedToaster: React.FC = () => {
+  const { theme } = useTheme();
+  return <Toaster richColors position="top-right" theme={theme} />;
+};
 
 const App: React.FC = () => {
   return (
     <ThemeProvider>
-      <Toaster richColors position="top-right" />
+      <ThemedToaster />
       <BrowserRouter>
-        <div className="min-h-screen bg-[#F5F5F5] text-black dark:bg-[#232528] dark:text-white">
-          <Navbar className="bg-[#E5E7EB] dark:bg-[#1E1F22]" />
-          <main className="pb-4">
+        <div className="min-h-dvh bg-background text-foreground">
+          <Navbar />
+          <main className="pb-8">
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/auth/discord/callback" element={<DiscordAuthCallback />} />
-              <Route path="/unauthorized" element={<Unauthorized />} />
-              <Route path="/settings" element={<Settings />} />
               <Route path="/contact" element={<Contact />} />
-              {/* Add more routes as needed */}
+              <Route
+                path="/admin"
+                element={
+                  <Suspense fallback={null}>
+                    <Admin />
+                  </Suspense>
+                }
+              />
+              <Route path="*" element={<NotFound />} />
             </Routes>
           </main>
         </div>

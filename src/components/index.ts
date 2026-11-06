@@ -10,7 +10,6 @@ import ExperienceCard from './ExperienceCard';
 import { Button } from './ui/button';
 import { Badge } from './ui/badge';
 import { Input } from './ui/input';
-import { CardContainer, Card } from './ui/card-container';
 
 export {
   Navbar,
@@ -24,6 +23,4 @@ export {
   Button,
   Badge,
   Input,
-  CardContainer,
-  Card,
 };

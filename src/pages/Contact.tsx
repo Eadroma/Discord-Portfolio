@@ -1,74 +1,48 @@
 import React, { useEffect, useState } from 'react';
-import { DiscordUser } from '@/types/user.ts';
+import type { DiscordUser } from '@/types/user';
 import { toast } from 'sonner';
 import { Badge, Input } from '@/components';
 import { Send, User, AtSign, Phone, MessageSquare, Zap } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
-import userConfig from '@/config/user.config.json';
+import { profile } from '@/content/profile';
+import { avatarUrl, readDiscordUser } from '@/lib/discord';
+import { validateContact } from '@/lib/contact';
+
+const field =
+  'w-full border-input bg-secondary text-body placeholder:text-muted-foreground focus-visible:border-ring';
+const label = 'mb-2 flex items-center gap-2 text-sm font-semibold text-muted-foreground';
 
 const Contact: React.FC = () => {
   const { t } = useTranslation();
-  const [user, setUser] = React.useState<DiscordUser | null>(null);
+  const [user, setUser] = useState<DiscordUser | null>(null);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  const [contactPhone, setContactPhone] = useState('');
-  const [message, setMessage] = React.useState('');
+  const [phone, setPhone] = useState('');
+  const [message, setMessage] = useState('');
   const [sending, setSending] = useState(false);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    if (name === 'name') setName(value);
-    else if (name === 'email') setEmail(value);
-    else if (name === 'phone') setContactPhone(value);
-  };
-
   useEffect(() => {
-    const storedUser = localStorage.getItem('discordUser');
-
-    if (!storedUser) {
-      return;
-    }
-
-    const parsedUser = JSON.parse(storedUser);
-    setUser(parsedUser);
-
-    // Pre-populate name field with Discord username
-    if (parsedUser?.globalName) {
-      setName(parsedUser.globalName);
-    } else if (parsedUser?.username) {
-      setName(parsedUser.username);
-    }
+    const stored = readDiscordUser();
+    if (!stored) return;
+    setUser(stored);
+    setName(stored.globalName ?? stored.username);
   }, []);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!name && (!email || !contactPhone)) {
-      toast.error('Please fill in all fields');
+  const send = async (form: HTMLFormElement) => {
+    const input = { name, email, phone, message };
+    const invalid = validateContact(input);
+    if (invalid) {
+      toast.error(t(`notification.contact.${invalid}`));
       return;
     }
 
     setSending(true);
     try {
-      const webhookUrl = import.meta.env.VITE_DISCORD_WEBHOOK_URL;
-      if (!webhookUrl) {
-        toast.error('Discord webhook URL not configured');
-        return;
-      }
-
-      const messageContent = `Name: ${name}\nEmail: ${email}\nPhone: ${contactPhone}\nMessage: ${message}`;
-
-      const response = await fetch(webhookUrl, {
+      const website = new FormData(form).get('website');
+      const response = await fetch('/api/contact', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          content: messageContent,
-          username: user?.globalName || user?.username || name,
-          avatar_url: user?.avatar
-            ? `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}`
-            : undefined,
-        }),
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...input, website }),
       });
 
       if (!response.ok) {
@@ -80,197 +54,189 @@ const Contact: React.FC = () => {
       setMessage('');
     } catch (error) {
       console.error('Failed to send message:', error);
-      toast.error('Failed to send message. Please try again.');
+      toast.error(t('notification.contact.error'));
     } finally {
       setSending(false);
     }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4 py-6 bg-gray-50 dark:bg-[#313338]">
-      <div className="w-full max-w-md mx-auto space-y-6">
-        {' '}
-        {/* Discord Profile Card */}
-        <div className="bg-white dark:bg-[#2B2D31] rounded-lg shadow-lg border border-gray-200 dark:border-[#1E1F22] overflow-hidden">
-          {/* Banner */}
-          <div className="h-20 bg-gradient-to-r from-[#5865F2] to-[#7289DA] relative">
+    <div className="flex min-h-[calc(100dvh-3.5rem)] items-center justify-center px-4 py-6">
+      <div className="mx-auto w-full max-w-md space-y-6">
+        <section className="overflow-hidden rounded-xl border bg-card shadow-sm">
+          <div className="relative h-20 bg-linear-to-br from-profile-primary to-profile-accent">
             {user?.banner && (
               <img
                 src={`https://cdn.discordapp.com/banners/${user.id}/${user.banner}?size=480`}
-                alt="Discord Banner"
-                className="w-full h-full object-cover"
+                alt=""
+                className="size-full object-cover"
               />
             )}
           </div>
 
-          {/* Profile Content */}
-          <div className="relative px-4 pb-4">
-            {/* Avatar and Name Section - Same line */}
-            <div className="flex items-center gap-4 pt-2 mb-3">
-              {/* Avatar */}
-              <div className="relative -mt-14 flex-shrink-0">
-                {user?.avatar ? (
-                  <div className="relative">
-                    <img
-                      src={`https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}?size=128`}
-                      alt="Discord Avatar"
-                      className="w-20 h-20 rounded-full border-4 border-white dark:border-[#2B2D31] shadow-lg"
-                    />
-                    {/* Online Status */}
-                    <div className="absolute bottom-1 right-1 w-6 h-6 bg-[#23A559] rounded-full border-4 border-white dark:border-[#2B2D31]">
-                      <div className="w-full h-full rounded-full bg-[#23A559]"></div>
-                    </div>
-                  </div>
-                ) : (
-                  <div className="w-20 h-20 rounded-full bg-gray-200 dark:bg-[#36393F] border-4 border-white dark:border-[#2B2D31] shadow-lg flex items-center justify-center">
-                    <User className="w-10 h-10 text-gray-400 dark:text-[#B5BAC1]" />
-                  </div>
-                )}
-              </div>
-
-              {/* Global Name aligned with avatar */}
-              <div className="flex-1 flex min-w-0 flex-col items-start">
-                <h1 className="text-xl font-bold text-gray-900 dark:text-white leading-tight truncate">
-                  {user?.globalName || userConfig.name}
-                </h1>
-                <div className="flex items-center gap-2 mt-1">
-                  <p className="text-sm text-gray-600 dark:text-[#B5BAC1]">
-                    {user?.username ? `@${user.username}` : '@me'}
-                  </p>
-                  {user?.badge?.tag && (
-                    <Badge
-                      variant="outline"
-                      className="text-xs bg-[#5865F2]/10 text-[#5865F2] border-[#5865F2]/20 hover:bg-[#5865F2]/20"
-                    >
-                      {user.badge.id && user.badge.guildId && (
-                        <img
-                          src={`https://cdn.discordapp.com/clan-badges/${user.badge.guildId}/${user.badge.id}?size=16`}
-                          alt="Badge icon"
-                          className="w-3 h-3 mr-1"
-                        />
-                      )}
-                      {user.badge.tag}
-                    </Badge>
-                  )}
-
-                  {/* Default badges for non-Discord users */}
-                  {!user && (
-                    <Badge
-                      variant="outline"
-                      className="text-xs bg-[#5865F2] text-white border-[#5865F2] px-2 py-1 rounded"
-                    >
-                      <Zap className="w-3 h-3 mr-1" />
-                      フリーマ
-                    </Badge>
-                  )}
+          <div className="flex items-center gap-4 px-4 pt-2 pb-4">
+            <div className="relative -mt-12 shrink-0">
+              {user ? (
+                <>
+                  <img
+                    src={avatarUrl(user, 128)}
+                    alt=""
+                    className="size-20 rounded-full border-4 border-card"
+                  />
+                  <span className="absolute right-1 bottom-1 size-5 rounded-full border-4 border-card bg-online" />
+                </>
+              ) : (
+                <div className="flex size-20 items-center justify-center rounded-full border-4 border-card bg-secondary">
+                  <User className="size-10 text-muted-foreground" aria-hidden="true" />
                 </div>
-              </div>
+              )}
             </div>
 
-            {/* Badges */}
-            <div className="flex flex-wrap gap-2 mb-3"></div>
+            <div className="flex min-w-0 flex-1 flex-col items-start">
+              <h1 className="w-full truncate text-xl leading-tight font-bold">
+                {user?.globalName ?? user?.username ?? profile.name}
+              </h1>
+              <div className="mt-1 flex items-center gap-2">
+                <p className="text-sm text-muted-foreground">
+                  {user ? `@${user.username}` : '@me'}
+                </p>
+                {user?.badge?.tag && (
+                  <Badge variant="outline" className="border-primary/20 bg-primary/10 text-primary">
+                    {user.badge.id && user.badge.guildId && (
+                      <img
+                        src={`https://cdn.discordapp.com/clan-badges/${user.badge.guildId}/${user.badge.id}?size=16`}
+                        alt=""
+                        className="mr-1 size-3"
+                      />
+                    )}
+                    {user.badge.tag}
+                  </Badge>
+                )}
+                {!user && (
+                  <Badge className="bg-primary text-primary-foreground">
+                    <Zap aria-hidden="true" />
+                    フリーマ
+                  </Badge>
+                )}
+              </div>
+            </div>
           </div>
-        </div>
-        {/* Contact Form */}
-        <div className="bg-white dark:bg-[#2B2D31] rounded-lg shadow-lg p-6 border border-gray-200 dark:border-[#1E1F22]">
-          <div className="text-center mb-6">
-            <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
-              {t('contact.title')}
-            </h2>
-            <p className="text-sm text-gray-600 dark:text-[#B5BAC1]">
-              Send me a message and I'll get back to you!
-            </p>
+        </section>
+
+        <section className="rounded-xl border bg-card p-6 shadow-sm">
+          <div className="mb-6 text-center">
+            <h2 className="mb-2 text-xl font-bold">{t('contact.title')}</h2>
+            <p className="text-body text-muted-foreground">{t('contact.subtitle')}</p>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-4">
-            {/* Name Field */}
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              void send(e.currentTarget);
+            }}
+            className="space-y-4"
+          >
+            {/* Honeypot: hidden from people and screen readers, bots fill it in */}
+            <input
+              type="text"
+              name="website"
+              tabIndex={-1}
+              autoComplete="off"
+              aria-hidden="true"
+              className="hidden"
+            />
+
             <div>
-              <label className="flex items-center gap-2 text-sm font-medium text-gray-600 dark:text-[#B5BAC1] mb-2">
-                <User className="h-4 w-4 text-[#5865F2]" />
+              <label htmlFor="contact-name" className={label}>
+                <User className="size-4 text-primary" aria-hidden="true" />
                 {t('contact.form.name.label')}
               </label>
               <Input
+                id="contact-name"
                 type="text"
                 name="name"
+                autoComplete="name"
                 value={name}
-                onChange={handleChange}
+                onChange={(e) => setName(e.target.value)}
                 placeholder={t('contact.form.name.placeholder')}
-                className={`w-full bg-gray-50 dark:bg-[#1E1F22] border-gray-300 dark:border-[#3C3F44] text-gray-900 dark:text-white focus:ring-[#5865F2] focus:border-[#5865F2] ${user ? 'opacity-75' : ''}`}
+                className={`${field} ${user ? 'opacity-75' : ''}`}
                 required
                 readOnly={!!user}
               />
             </div>
 
-            {/* Email and Phone */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <div>
-                <label className="flex items-center gap-2 text-sm font-medium text-gray-600 dark:text-[#B5BAC1] mb-2">
-                  <AtSign className="h-4 w-4 text-[#5865F2]" />
+                <label htmlFor="contact-email" className={label}>
+                  <AtSign className="size-4 text-primary" aria-hidden="true" />
                   {t('contact.form.email.label')}
                 </label>
                 <Input
+                  id="contact-email"
                   type="email"
                   name="email"
+                  autoComplete="email"
                   value={email}
-                  onChange={handleChange}
+                  onChange={(e) => setEmail(e.target.value)}
                   placeholder={t('contact.form.email.placeholder')}
-                  className="w-full bg-gray-50 dark:bg-[#1E1F22] border-gray-300 dark:border-[#3C3F44] text-gray-900 dark:text-white focus:ring-[#5865F2] focus:border-[#5865F2]"
+                  className={field}
                 />
               </div>
 
               <div>
-                <label className="flex items-center gap-2 text-sm font-medium text-gray-600 dark:text-[#B5BAC1] mb-2">
-                  <Phone className="h-4 w-4 text-[#5865F2]" />
+                <label htmlFor="contact-phone" className={label}>
+                  <Phone className="size-4 text-primary" aria-hidden="true" />
                   {t('contact.form.phone.label')}
                 </label>
                 <Input
+                  id="contact-phone"
                   type="tel"
                   name="phone"
-                  value={contactPhone}
-                  onChange={handleChange}
+                  autoComplete="tel"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
                   placeholder={t('contact.form.phone.placeholder')}
-                  className="w-full bg-gray-50 dark:bg-[#1E1F22] border-gray-300 dark:border-[#3C3F44] text-gray-900 dark:text-white focus:ring-[#5865F2] focus:border-[#5865F2]"
+                  className={field}
                 />
               </div>
             </div>
 
-            {/* Message Field */}
             <div>
-              <label className="flex items-center gap-2 text-sm font-medium text-gray-600 dark:text-[#B5BAC1] mb-2">
-                <MessageSquare className="h-4 w-4 text-[#5865F2]" />
+              <label htmlFor="contact-message" className={label}>
+                <MessageSquare className="size-4 text-primary" aria-hidden="true" />
                 {t('contact.form.message.label')}
               </label>
               <textarea
+                id="contact-message"
                 name="message"
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
                 placeholder={t('contact.form.message.placeholder')}
                 rows={4}
-                className="w-full bg-gray-50 dark:bg-[#1E1F22] border border-gray-300 dark:border-[#3C3F44] text-gray-900 dark:text-white rounded-md focus:ring-[#5865F2] focus:border-[#5865F2] p-3 resize-none text-sm placeholder-gray-500 dark:placeholder-[#87898C]"
+                className={`${field} resize-none rounded-md border p-3 outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50`}
                 required
               />
             </div>
 
-            {/* Submit Button */}
             <button
               type="submit"
               disabled={sending}
-              className="w-full flex items-center justify-center gap-2 bg-[#5865F2] hover:bg-[#4752C4] disabled:bg-gray-400 dark:disabled:bg-gray-600 text-white font-medium py-3 px-4 rounded-md transition-colors duration-200 disabled:cursor-not-allowed"
+              className="flex w-full items-center justify-center gap-2 rounded-md bg-primary px-4 py-3 text-body font-semibold text-primary-foreground transition-[background-color,transform] duration-150 ease-out hover:bg-primary-hover active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50 disabled:active:scale-100"
             >
               {sending ? (
                 <>
-                  <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                  <span className="size-4 animate-spin rounded-full border-2 border-current border-t-transparent" />
                   {t('contact.form.sending')}
                 </>
               ) : (
                 <>
-                  <Send className="h-4 w-4" />
+                  <Send className="size-4" aria-hidden="true" />
                   {t('contact.form.submit')}
                 </>
               )}
             </button>
           </form>
-        </div>
+        </section>
       </div>
     </div>
   );

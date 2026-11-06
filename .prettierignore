@@ -1,11 +1,5 @@
-
-build/**/*
-public/**/*
-node_modules/**/*
-.history/**/*
-.vscode/**/*
-.yarn/**/*
-.yarncache/**/*
-.idea/**/*
-
-package.json
+dist
+coverage
+node_modules
+public
+package-lock.json

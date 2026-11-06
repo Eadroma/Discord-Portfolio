@@ -1,61 +1,31 @@
-import { createContext, useContext, useEffect, useState, ReactNode, FC } from 'react';
+import { useEffect, useState, type FC, type ReactNode } from 'react';
+import { ThemeContext, type Theme } from './theme-context';
 
-type Theme = 'dark' | 'light';
+// Read by the inline script in index.html, which sets the first theme before React loads.
+const STORAGE_KEY = 'portfolio-theme';
 
-type ThemeProviderProps = {
-  children: ReactNode;
-  defaultTheme?: Theme;
-  storageKey?: string;
-};
-
-type ThemeProviderState = {
-  theme: Theme;
-  setTheme: (theme: Theme) => void;
-};
-
-const initialState: ThemeProviderState = {
-  theme: 'dark',
-  setTheme: () => null,
-};
-
-const ThemeProviderContext = createContext<ThemeProviderState>(initialState);
-
-export const ThemeProvider: FC<ThemeProviderProps> = ({
-  children,
-  defaultTheme = 'dark',
-  storageKey = 'portfolio-theme',
-  ...props
-}) => {
-  const [theme, setTheme] = useState<Theme>(
-    () => (localStorage.getItem(storageKey) as Theme) || defaultTheme,
+export const ThemeProvider: FC<{ children: ReactNode }> = ({ children }) => {
+  const [theme, setTheme] = useState<Theme>(() =>
+    document.documentElement.classList.contains('light') ? 'light' : 'dark',
   );
 
   useEffect(() => {
     const root = window.document.documentElement;
-
     root.classList.remove('light', 'dark');
     root.classList.add(theme);
   }, [theme]);
 
   const value = {
     theme,
-    setTheme: (theme: Theme) => {
-      localStorage.setItem(storageKey, theme);
-      setTheme(theme);
+    setTheme: (next: Theme) => {
+      try {
+        localStorage.setItem(STORAGE_KEY, next);
+      } catch {
+        // Storage blocked: the choice lasts until the tab closes.
+      }
+      setTheme(next);
     },
   };
 
-  return (
-    <ThemeProviderContext.Provider {...props} value={value}>
-      {children}
-    </ThemeProviderContext.Provider>
-  );
-};
-
-export const useTheme = () => {
-  const context = useContext(ThemeProviderContext);
-
-  if (context === undefined) throw new Error('useTheme must be used within a ThemeProvider');
-
-  return context;
+  return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>;
 };

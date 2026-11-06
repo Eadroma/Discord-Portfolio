@@ -12,10 +12,19 @@
     "en": "Sample City, Country",
     "fr": "Exemple Ville, Pays"
   },
+  "status": {
+    "en": "Open to freelance work",
+    "fr": "Disponible pour des missions freelance"
+  },
   "email": "example@example.com",
   "phone": "+00 123 456 7890",
+  "theme": {
+    "primary": "#5865F2",
+    "accent": "#3BA55C"
+  },
   "socials": {
-    "linkedin": "https://linkedin.com/in/example"
+    "linkedin": "https://linkedin.com/in/example",
+    "github": "octocat"
   },
   "skills": [
     {
@@ -42,7 +51,10 @@
   "experiences": [
     {
       "company": "Tech Solutions",
-      "position": "Frontend Developer",
+      "position": {
+        "en": "Frontend Developer",
+        "fr": "Développeur frontend"
+      },
       "startDate": "2020-01-01",
       "endDate": "2021-12-31",
       "description": {
@@ -52,7 +64,10 @@
     },
     {
       "company": "Innovate Inc.",
-      "position": "Full Stack Developer",
+      "position": {
+        "en": "Full Stack Developer",
+        "fr": "Développeur full stack"
+      },
       "startDate": "2022-01-01",
       "endDate": null,
       "description": {
